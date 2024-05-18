@@ -1,0 +1,17 @@
+:root {
+  --primary-color: #0d350f;
+  --secondary-color: #f1f8e9;
+  --accent-color: #ffeb3b;
+  --background-color: #ffffff;
+  --border-color: #000000;
+
+  --logo-font: 'Playfair Display SC', serif;
+  --title-font: 'Libre Baskerville', serif;
+  --body-font: 'Merriweather', serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+}
