@@ -1,0 +1,15 @@
+.header {
+  background-color: var(--primary-color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header__logo {
+  color: var(--secondary-color);
+  font-size: 3rem;
+  font-family: var(--logo-font);
+  font-weight: 900;
+  font-style: normal;
+  cursor: pointer;
+}

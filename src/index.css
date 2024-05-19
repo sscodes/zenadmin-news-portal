@@ -1,12 +1,13 @@
 :root {
-  --primary-color: #0d350f;
-  --secondary-color: #f1f8e9;
-  --accent-color: #ffeb3b;
-  --background-color: #ffffff;
+  --primary-color: #011c57;
+  --secondary-color: #ffffff;
+  --accent-color: #292e58;
+  --background-color: #eaeaea;
   --border-color: #000000;
 
   --logo-font: 'Playfair Display SC', serif;
-  --title-font: 'Libre Baskerville', serif;
+  --title-font-1: 'Libre Baskerville', serif;
+  --title-font-2: "Lato", sans-serif;
   --body-font: 'Merriweather', serif;
 }
 
