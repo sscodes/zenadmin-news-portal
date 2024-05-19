@@ -6,7 +6,7 @@ const LatestNews = () => {
     <div className='latest-news'>
       <h1>Latest News:</h1>
       <div className='latest-news-section'>
-        {[...Array(4)].map((news: Number, i: Key) => (
+        {[...Array(10)].map((news: Number, i: Key) => (
           <div key={i}>
             <NewsCard news={news} />
           </div>
