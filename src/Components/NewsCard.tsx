@@ -1,10 +1,10 @@
-const NewsCard = ({ news }: { news: Number }) => {
+const NewsCard = ({ news = { text: '', author: '' } }) => {
   return (
-    <div className='latest-news-card'>
-      <a href='' className='latest-news-card__new-title'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing.
+    <div className='news-card'>
+      <a href='' className='news-card__new-title'>
+        {news.text.slice(0, 47)}...
       </a>
-      <div className="latest-news-card__author">- author</div>
+      <div className='news-card__author'>- {news.author}</div>
     </div>
   );
 };
