@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import LatestNews from '../Components/LatestNews/LatestNews';
-import SearchSection from '../Components/SerachSection/SearchSection';
+import LatestNews from '../../Components/LatestNews/LatestNews';
+import SearchSection from '../../Components/SerachSection/SearchSection';
+import './Home.css';
 
 const Home = () => {
   const {

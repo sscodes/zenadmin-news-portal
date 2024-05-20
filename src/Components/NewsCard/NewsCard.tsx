@@ -1,8 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
 
-const NewsCard = ({ news = { text: '', author: '' } }) => {
+const NewsCard = ({ news }) => {
+  const navigate = useNavigate();
+  const navigateToDetails = () => {
+    navigate(`/news/${news.story_id}`);
+  };
+
   return (
-    <div className='news-card'>
+    <div className='news-card' onClick={navigateToDetails}>
       <div className='news-card__title'>
         <a href={news?.url} target='_blank' className='news-card__new-title'>
           {news?.title.slice(0, 74)}

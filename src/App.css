@@ -1,18 +1,3 @@
 .hero-section {
   margin: 2%;
 }
-
-.home {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-input {
-  font-size: 2rem;
-  padding: 0.7%;
-  border: none;
-  border-radius: 15px;
-  font-family: var(--title-font-2);
-  width: 74rem;
-}

@@ -25,7 +25,7 @@ const NewsSection = ({ data }) => {
           onClick={decrease}
         />
       </div>
-      {data.slice(limit - 4, limit).map((news, i: Key) => (
+      {data?.slice(limit - 4, limit).map((news, i: Key) => (
         <div key={i}>
           <NewsCard news={news} />
         </div>

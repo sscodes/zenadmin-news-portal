@@ -16,7 +16,7 @@ const Comment = ({ data, limit }) => {
     return { __html: html };
   };
 
-  return data.slice(0, limit).map((data) => (
+  return data?.slice(0, limit).map((data) => (
     <div
       className={`comment-card ${
         data.parent_id ? 'child-comment' : 'parent-comment'
@@ -33,7 +33,7 @@ const Comment = ({ data, limit }) => {
         className='comment-card__comment'
         dangerouslySetInnerHTML={createMarkup(he.decode(data.text))}
       />
-      {data.children && data.children.length && (
+      {data.children && data.children.length > 0 && (
         <div
           className='comment-card__show-more'
           onClick={() => handleShowReply(data.id)}
