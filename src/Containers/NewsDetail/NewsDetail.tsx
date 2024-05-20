@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import Comment from '../Components/Comment';
+import { FaHeart } from 'react-icons/fa';
+import Comment from '../../Components/Comment/Comment';
+import './NewsDetail.css';
 
 const NewsDetail = () => {
   const [limit, setLimit] = useState(5);
@@ -9560,7 +9562,6 @@ const NewsDetail = () => {
     url: 'https://www.bloomberg.com/news/articles/2017-06-16/amazon-to-buy-whole-foods?cmpid=socialflow-twitter-business&utm_content=business&utm_campaign=socialflow-organic&utm_source=twitter&utm_medium=social',
   };
 
-
   const handleScrolledToBottom = () => {
     if (
       document.documentElement.scrollTop + window.innerHeight >=
@@ -9575,22 +9576,21 @@ const NewsDetail = () => {
     return () => window.removeEventListener('scroll', handleScrolledToBottom);
   }, []);
 
-
   return (
     <div className='news-detail'>
       <a href={data.url} target='_blank' className='news-detail__title'>
         <h1>{data.title}</h1>
       </a>
       <div className='news-detail__points'>
-        <span>
-          <b>Points:</b>{' '}
-        </span>
-        <span>{data.points}</span>
+        <div className='points__icon'>
+          <FaHeart />{' '}
+        </div>
+        <div>{data.points}</div>
       </div>
       <div className='news-detail__comments-section'>
         <h2 className='comments-section__title'>Comments: </h2>
         <div className='comments-section__comments'>
-            <Comment data={data.children} limit={limit} />
+          <Comment data={data.children} limit={limit} />
         </div>
       </div>
     </div>

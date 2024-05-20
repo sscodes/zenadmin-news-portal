@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { CgProfile } from 'react-icons/cg';
 import he from 'he';
+import { useState } from 'react';
+import Images from '../../Assets';
+import './Comment.css';
 
 const Comment = ({ data, limit }) => {
   const [showReply, setShowReply] = useState(false);
@@ -16,12 +17,17 @@ const Comment = ({ data, limit }) => {
   };
 
   return data.slice(0, limit).map((data) => (
-    <div className='comment-card' key={data.id}>
+    <div
+      className={`comment-card ${
+        data.parent_id ? 'child-comment' : 'parent-comment'
+      }`}
+      key={data.id}
+    >
       <div className='comment-card__username'>
         <div className='card__username'>
-          <CgProfile />
+          <img src={Images.Profile} alt='profile-placeholder' width={47} />
         </div>
-        {data.author}
+        <div>{data.author}</div>
       </div>
       <div
         className='comment-card__comment'
