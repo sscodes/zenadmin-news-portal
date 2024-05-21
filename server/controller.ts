@@ -52,7 +52,7 @@ const getSearchedNews: (
 ) => {
   try {
     const response = await crossFetch(
-      ` http://hn.algolia.com/api/v1/search?query=${req.query.query}`
+      ` http://hn.algolia.com/api/v1/search?query=${req.query.query}&tags=story`
     );
     const data = await response.json();
     res.json(data);

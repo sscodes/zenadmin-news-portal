@@ -4,6 +4,7 @@ import Error from '../../Components/Error/Error';
 import LatestNews from '../../Components/LatestNews/LatestNews';
 import SearchedNews from '../../Components/SearchedNews/SearchedNews';
 import SearchSection from '../../Components/SerachSection/SearchSection';
+import Skeleton from '../../Components/Skeleton';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import './Home.css';
 
@@ -13,32 +14,38 @@ const Home = () => {
     queryFn: fetchLatestNews,
   });
 
-  const searchData = useSearchedNewsStore((state) => state.response.data?.hits);
+  const response = useSearchedNewsStore((state) => state.response);
 
   return (
     <div className='home'>
       <SearchSection />
-      <div className='latest-news'>
-        <h1>Latest News:</h1>
-        {isLoading ? (
-          <div className='home-skeleton-section'>
-            <div></div>
-            {[...Array(4)].map((_, i) => (
-              <div
-                key={i}
-                className='home-skeleton-section__skeleton animate-pulse'
-              ></div>
-            ))}
-            <div></div>
+      {!response.isLoading && !response.data && !response.error && (
+        <div className='latest-news'>
+          <h1>Latest News:</h1>
+          {isLoading ? (
+            <Skeleton />
+          ) : error ? (
+            <Error />
+          ) : (
+            data && !response.data && <LatestNews news={data.hits} />
+          )}
+        </div>
+      )}
+      {response.isLoading ? (
+        <Skeleton />
+      ) : response.error ? (
+        <Error />
+      ) : response.data && response.data.hits.length > 0 ? (
+        <SearchedNews news={response.data?.hits} />
+      ) : (
+        response.data &&
+        response.data.hits.length === 0 && (
+          <div className='error-section'>
+            <h1 className='error-message-section__error-message'>
+              Sorry, no news found with that keyword.
+            </h1>
           </div>
-        ) : error ? (
-          <Error />
-        ) : (
-          data && !searchData && <LatestNews news={data.hits} />
-        )}
-      </div>
-      {searchData && searchData.length > 0 && (
-        <SearchedNews news={searchData} />
+        )
       )}
     </div>
   );

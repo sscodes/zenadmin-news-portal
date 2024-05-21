@@ -19,14 +19,14 @@ input {
 
 .home-skeleton-section {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
 
 .home-skeleton-section__skeleton {
   background-color: var(--skeleton-color);
   display: inline-block;
-  height: 10rem;
-  width: 20rem;
+  height: 15rem;
+  width: 25rem;
   border-radius: 10px;
 }
