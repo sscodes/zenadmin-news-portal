@@ -61,9 +61,10 @@ export type NewsListsType = {
   serverTimeMS: number;
 };
 
-export type imagesTypes = {
+export type ImagesTypes = {
   Profile: string;
   Error: string;
+  NotFoundError: string;
 };
 
 export interface NewsDetails {
