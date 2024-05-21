@@ -1,23 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { fetchLatestNews } from '../../API/API';
 import Error from '../../Components/Error/Error';
 import LatestNews from '../../Components/LatestNews/LatestNews';
 import SearchedNews from '../../Components/SearchedNews/SearchedNews';
 import SearchSection from '../../Components/SerachSection/SearchSection';
+import { useSearchedNewsStore } from '../../Zustand/Store';
 import './Home.css';
-import { HitsType } from '../../Types/Type';
 
 const Home = () => {
-  const [searchData, setSearchData] = useState<HitsType[]>([]);
   const { data, isLoading, error } = useQuery({
     queryKey: ['latestNews'],
     queryFn: fetchLatestNews,
   });
 
+  const searchData = useSearchedNewsStore((state) => state.response.data?.hits);
+
   return (
     <div className='home'>
-      <SearchSection setSearchData={setSearchData} />
+      <SearchSection />
       <div className='latest-news'>
         <h1>Latest News:</h1>
         {isLoading ? (
@@ -34,10 +34,12 @@ const Home = () => {
         ) : error ? (
           <Error />
         ) : (
-          data && searchData.length === 0 && <LatestNews news={data.hits} />
+          data && !searchData && <LatestNews news={data.hits} />
         )}
       </div>
-      {searchData.length > 0 && <SearchedNews news={searchData} />}
+      {searchData && searchData.length > 0 && (
+        <SearchedNews news={searchData} />
+      )}
     </div>
   );
 };

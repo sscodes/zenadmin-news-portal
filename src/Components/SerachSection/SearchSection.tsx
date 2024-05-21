@@ -1,28 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { fetchSearchResults } from '../../API/API';
-import { HitsType } from '../../Types/Type';
+import { useSearchedNewsStore } from '../../Zustand/Store';
 import './SearchSection.css';
 
-type propType = {
-  setSearchData: React.Dispatch<React.SetStateAction<HitsType[]>>;
-};
-
-const SearchSection = ({ setSearchData }: propType) => {
+const SearchSection = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
 
   // const debouncedSearchKeyword = useDebounce(searchKeyword)
 
-  const { data, isLoading, error } = useQuery({
+  const searchNewsResponse = useQuery({
     queryKey: ['search-news', searchKeyword],
     queryFn: () => fetchSearchResults(searchKeyword),
     enabled: searchKeyword.length > 0,
   });
 
+  const setNews = useSearchedNewsStore((state) => state.setNews);
+
   useEffect(() => {
-    if (data?.hits) setSearchData(data.hits);
-    else setSearchData([]);
-  }, [data]);
+    setNews(searchNewsResponse);
+  }, [
+    searchNewsResponse.data,
+    searchNewsResponse.isLoading,
+    searchNewsResponse.error,
+  ]);
 
   return (
     <div className='search-section'>
