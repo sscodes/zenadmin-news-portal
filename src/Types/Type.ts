@@ -1,3 +1,5 @@
+import { UseQueryResult } from "@tanstack/react-query";
+
 export type HitsType = {
   _highlightResult: {
     author: {
@@ -67,7 +69,7 @@ export type ImagesTypes = {
   NotFoundError: string;
 };
 
-export interface NewsDetails {
+export type NewsDetails = {
   author: string;
   children: NewsDetails[];
   points: number;
@@ -77,3 +79,12 @@ export interface NewsDetails {
   text: string;
   url: string;
 }
+
+export type SearchedNewsstore = {
+  response: {
+    data: NewsListsType | undefined;
+    isLoading: boolean;
+    error: Error | null;
+  };
+  setNews: (res: UseQueryResult<NewsListsType, Error>) => void;
+};

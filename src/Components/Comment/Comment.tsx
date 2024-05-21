@@ -23,7 +23,7 @@ const Comment = ({ data, limit }: PropType) => {
   };
 
   return (
-    <div>
+    <>
       {data?.slice(0, limit).map((data) => (
         <div
           className={`comment-card ${
@@ -60,7 +60,7 @@ const Comment = ({ data, limit }: PropType) => {
             )}
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

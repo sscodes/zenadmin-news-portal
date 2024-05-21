@@ -1,15 +1,6 @@
 import { UseQueryResult } from '@tanstack/react-query';
 import { create } from 'zustand';
-import { NewsListsType } from '../Types/Type';
-
-type SearchedNewsstore = {
-  response: {
-    data: NewsListsType | undefined;
-    isLoading: boolean;
-    error: Error | null;
-  };
-  setNews: (res: UseQueryResult<NewsListsType, Error>) => void;
-};
+import { NewsListsType, SearchedNewsstore } from '../Types/Type';
 
 export const useSearchedNewsStore = create<SearchedNewsstore>((set) => ({
   response: {
