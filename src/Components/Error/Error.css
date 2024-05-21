@@ -1,0 +1,14 @@
+.error-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.error-message-section {
+  text-align: center;
+}
+
+.error-message-section__error-message {
+  font-family: var(--body-font);
+}
