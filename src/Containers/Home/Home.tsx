@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { fetchLatestNews } from '../../API/API';
 import Error from '../../Components/Error/Error';
 import LatestNews from '../../Components/LatestNews/LatestNews';
 import SearchedNews from '../../Components/SearchedNews/SearchedNews';
@@ -14,10 +15,7 @@ const Home = () => {
     error: latestNewsError,
   } = useQuery({
     queryKey: ['latestNews'],
-    queryFn: async () => {
-      const res = await fetch('http://localhost:4000/api/latest-news');
-      return await res.json();
-    },
+    queryFn: fetchLatestNews,
   });
 
   return (
@@ -41,8 +39,8 @@ const Home = () => {
         ) : (
           searchData.length === 0 && <LatestNews news={latestNews?.hits} />
         )}
-        {searchData.length > 0 && <SearchedNews news={searchData} />}
       </div>
+      {searchData.length > 0 && <SearchedNews news={searchData} />}
     </div>
   );
 };

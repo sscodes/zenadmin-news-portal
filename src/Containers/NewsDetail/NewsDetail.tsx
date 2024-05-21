@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import { fetchNewsDetail } from '../../API/API';
 import Comment from '../../Components/Comment/Comment';
 import Error from '../../Components/Error/Error';
 import './NewsDetail.css';
@@ -13,10 +14,7 @@ const NewsDetail = () => {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['news-details'],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:4000/api/news-details/${id}`);
-      return await res.json();
-    },
+    queryFn: () => fetchNewsDetail(Number(id)),
   });
 
   const handleScrolledToBottom = () => {
