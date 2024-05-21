@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { HitsType } from '../../Types/Type';
 import './NewsCard.css';
 
-const NewsCard = ({ news }) => {
+const NewsCard = ({ news }: { news: HitsType }) => {
   const navigate = useNavigate();
   const navigateToDetails = () => {
     navigate(`/news/${news.story_id}`);

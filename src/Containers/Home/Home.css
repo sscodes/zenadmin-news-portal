@@ -13,6 +13,10 @@ input {
   width: 74rem;
 }
 
+.latest-news {
+  font-family: var(--title-font-2);
+}
+
 .home-skeleton-section {
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr;

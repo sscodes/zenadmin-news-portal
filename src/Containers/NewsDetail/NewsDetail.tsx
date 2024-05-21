@@ -7,13 +7,13 @@ import Comment from '../../Components/Comment/Comment';
 import Error from '../../Components/Error/Error';
 import './NewsDetail.css';
 
-const NewsDetail = () => {
+const NewsDetail: () => JSX.Element = () => {
   const [limit, setLimit] = useState(5);
 
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['news-details'],
+    queryKey: ['news-details', id],
     queryFn: () => fetchNewsDetail(Number(id)),
   });
 
@@ -39,6 +39,8 @@ const NewsDetail = () => {
     </div>
   ) : error ? (
     <Error />
+  ) : !data ? (
+    <div></div>
   ) : (
     <div className='news-detail'>
       <a href={data.url} target='_blank' className='news-detail__title'>

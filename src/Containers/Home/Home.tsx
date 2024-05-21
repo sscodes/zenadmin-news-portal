@@ -6,14 +6,11 @@ import LatestNews from '../../Components/LatestNews/LatestNews';
 import SearchedNews from '../../Components/SearchedNews/SearchedNews';
 import SearchSection from '../../Components/SerachSection/SearchSection';
 import './Home.css';
+import { HitsType } from '../../Types/Type';
 
 const Home = () => {
-  const [searchData, setSearchData] = useState([]);
-  const {
-    data: latestNews,
-    isLoading: latestNewsLoading,
-    error: latestNewsError,
-  } = useQuery({
+  const [searchData, setSearchData] = useState<HitsType[]>([]);
+  const { data, isLoading, error } = useQuery({
     queryKey: ['latestNews'],
     queryFn: fetchLatestNews,
   });
@@ -23,7 +20,7 @@ const Home = () => {
       <SearchSection setSearchData={setSearchData} />
       <div className='latest-news'>
         <h1>Latest News:</h1>
-        {latestNewsLoading ? (
+        {isLoading ? (
           <div className='home-skeleton-section'>
             <div></div>
             {[...Array(4)].map((_, i) => (
@@ -34,10 +31,10 @@ const Home = () => {
             ))}
             <div></div>
           </div>
-        ) : latestNewsError ? (
+        ) : error ? (
           <Error />
         ) : (
-          searchData.length === 0 && <LatestNews news={latestNews?.hits} />
+          data && searchData.length === 0 && <LatestNews news={data.hits} />
         )}
       </div>
       {searchData.length > 0 && <SearchedNews news={searchData} />}
