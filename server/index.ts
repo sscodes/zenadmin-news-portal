@@ -57,6 +57,31 @@ app.get(
   }
 );
 
+app.get(
+  '/api/search',
+  async (
+    req: { query: { query: string } },
+    res: {
+      json: (arg0: any) => void;
+      status: (arg0: number) => {
+        (): any;
+        new (): any;
+        json: { (arg0: { error: string }): void; new (): any };
+      };
+    }
+  ) => {
+    try {
+      const response = await crossFetch(
+        ` http://hn.algolia.com/api/v1/search?query=${req.query.query}`
+      );
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch latest news' });
+    }
+  }
+);
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

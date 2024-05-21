@@ -11,7 +11,7 @@ const NewsDetail = () => {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['latestNews'],
+    queryKey: ['news-details'],
     queryFn: async () => {
       const res = await fetch(`http://localhost:4000/api/news-details/${id}`);
       return await res.json();

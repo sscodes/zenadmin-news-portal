@@ -2,8 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import LatestNews from '../../Components/LatestNews/LatestNews';
 import SearchSection from '../../Components/SerachSection/SearchSection';
 import './Home.css';
+import { useState } from 'react';
+import SearchedNews from '../../Components/SearchedNews/SearchedNews';
 
 const Home = () => {
+  const [searchData, setSearchData] = useState([]);
   const {
     data: latestNews,
     isLoading,
@@ -18,8 +21,13 @@ const Home = () => {
 
   return (
     <div className='home'>
-      <SearchSection />
-      {!isLoading && <LatestNews news={latestNews?.hits} />}
+      <SearchSection setSearchData={setSearchData} />
+      {!isLoading && searchData.length === 0 && (
+        <LatestNews news={latestNews?.hits} />
+      )}
+      {searchData.length > 0 && (
+        <SearchedNews news={searchData} />
+      )}
     </div>
   );
 };
