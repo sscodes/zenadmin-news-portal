@@ -17,7 +17,7 @@ const Pagination = ({
   return (
     <div className='pagination-container'>
       <div
-        className='pagination-icons'
+        className='pagination-container__pagination-icons'
         onClick={() =>
           setPage((i) => {
             console.log(i);
@@ -30,7 +30,9 @@ const Pagination = ({
       </div>
       {[...Array(totalPages)].map((_, i) => (
         <div
-          className={`pagination ${page === i ? 'pagination-selected' : ''}`}
+          className={`pagination-container__pagination ${
+            page === i ? 'pagination-container__pagination--selected' : ''
+          }`}
           onClick={() => setPage(i)}
           key={i}
         >
@@ -38,7 +40,7 @@ const Pagination = ({
         </div>
       ))}
       <div
-        className='pagination-icons'
+        className='pagination-container__pagination-icons'
         onClick={() => setPage((i) => (i + 1) % totalPages)}
       >
         <MdOutlineKeyboardDoubleArrowRight />

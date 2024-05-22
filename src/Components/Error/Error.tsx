@@ -10,8 +10,8 @@ const Error = ({
   return (
     <div className='error-section'>
       {loader}
-      <div className='error-message-section'>
-        <h1 className='error-message-section__error-message'>{message}</h1>
+      <div className='error-section__error-message-section'>
+        <h1 className='error-section__error-message'>{message}</h1>
       </div>
     </div>
   );

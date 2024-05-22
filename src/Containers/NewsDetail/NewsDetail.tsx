@@ -49,15 +49,19 @@ const NewsDetail: () => JSX.Element = () => {
         <h1>{data.title}</h1>
       </a>
       <div className='news-detail__points'>
-        <div className='points__icon'>
+        <div className='news-detail__icon'>
           <FaHeart />{' '}
         </div>
         <div>{data.points}</div>
       </div>
       <div className='news-detail__comments-section'>
-        <h2 className='comments-section__title'>Comments: </h2>
-        <div className='comments-section__comments'>
-          <Comment data={data.children} limit={limit} />
+        <h2 className='news-detail__comment-title'>Comments: </h2>
+        <div className='news-detail__comments'>
+          {data.children.length > 0 ? (
+            <Comment data={data.children} limit={limit} />
+          ) : (
+            <div className='news-detail__no-comments'>No Comments Yet</div>
+          )}
         </div>
       </div>
     </div>

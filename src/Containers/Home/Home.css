@@ -4,6 +4,6 @@
   gap: 2rem;
 }
 
-.latest-news {
+.home__latest-news {
   font-family: var(--title-font-2);
 }

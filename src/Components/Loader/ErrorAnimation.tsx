@@ -16,13 +16,13 @@ const ErrorAnimation: React.FC = () => {
       animate='animate'
     >
       <motion.div
-        className='red-circle'
+        className='error-container__red-circle'
         variants={circleVariants}
         initial='initial'
         animate='animate'
       >
         <motion.div
-          className='exclamation-mark'
+          className='error-container__exclamation-mark'
           variants={exclamationVariants}
           initial='initial'
           animate='animate'

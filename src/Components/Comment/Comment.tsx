@@ -27,12 +27,12 @@ const Comment = ({ data, limit }: PropType) => {
       {data?.slice(0, limit).map((data) => (
         <div
           className={`comment-card ${
-            data.parent_id ? 'child-comment' : 'parent-comment'
+            data.parent_id ? 'comment-card--child-comment' : 'comment-card--parent-comment'
           }`}
           key={data.id}
         >
           <div className='comment-card__username'>
-            <div className='card__username'>
+            <div className='comment-card__profile-picture'>
               <img src={Images.Profile} alt='profile-placeholder' width={47} />
             </div>
             <div>{data.author}</div>

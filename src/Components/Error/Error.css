@@ -5,10 +5,10 @@
   flex-direction: column;
 }
 
-.error-message-section {
+.error-section__error-message-section {
   text-align: center;
 }
 
-.error-message-section__error-message {
+.error-section__error-message {
   font-family: var(--body-font);
 }

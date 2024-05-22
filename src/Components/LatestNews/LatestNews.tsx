@@ -39,16 +39,20 @@ const LatestNews = ({ news }: { news: HitsType[] }) => {
           />
         </div>
       </div>
-      <div className='small-screen-navigation'>
+      <div className='news-section__small-screen-navigation'>
         <div>
           <IoIosArrowDropleftCircle
-            className={`${limit === 4 ? 'disabled' : 'icon'}`}
+            className={`news-section__icon ${
+              limit === 4 ? 'news-section__icon--disabled' : ''
+            }`}
             onClick={decrease}
           />
         </div>
         <div>
           <IoIosArrowDroprightCircle
-            className={`${limit >= news?.length ? 'disabled' : 'icon'}`}
+            className={`news-section__icon ${
+              limit >= news?.length ? 'news-section__icon--disabled' : ''
+            }`}
             onClick={increase}
           />
         </div>

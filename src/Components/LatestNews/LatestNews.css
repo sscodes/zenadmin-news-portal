@@ -11,21 +11,21 @@
   font-size: 4rem;
 }
 
-.icon {
+.news-section__icon {
   cursor: pointer;
 }
 
-.disabled {
+.news-section__icon--disabled {
   cursor: not-allowed;
   color: var(--accent-color);
 }
 
-.icon:hover {
+.news-section__icon:hover {
   font-size: 4.4rem;
   transition: 0.1s ease-in-out all;
 }
 
-.small-screen-navigation{
+.news-section__small-screen-navigation{
   display: none;
 }
 

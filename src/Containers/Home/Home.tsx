@@ -41,7 +41,7 @@ const Home = () => {
     <div className='home'>
       <SearchSection page={page} />
       {!response.isLoading && !response.data && !response.error && (
-        <div className='latest-news'>
+        <div className='home__latest-news'>
           <h1>Latest News:</h1>
           {isLoading ? (
             <Skeleton />

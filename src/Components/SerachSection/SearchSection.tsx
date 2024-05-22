@@ -37,7 +37,11 @@ const SearchSection = ({ page }: { page: number }) => {
   ]);
 
   useEffect(() => {
-    if (searchKeyword.length === 0) setSortInital();
+    if (searchKeyword.length === 0) {
+      setSortInital();
+      searchParams.delete('sortByPoints');
+      setSearchParams(searchParams, { replace: true });
+    }
     setSearchParams({ query: searchKeyword });
   }, [searchKeyword]);
 
@@ -64,8 +68,8 @@ const SearchSection = ({ page }: { page: number }) => {
           <div className='search-section__button-section'>
             <div>
               <button
-                className={`search-section__button-section__sort-button ${
-                  sortByPoints ? 'selected' : ''
+                className={`search-section__sort-button ${
+                  sortByPoints ? 'search-section__sort-button--selected' : ''
                 }`}
                 onClick={setSortByPoints}
               >
@@ -74,8 +78,8 @@ const SearchSection = ({ page }: { page: number }) => {
             </div>
             <div>
               <button
-                className={`search-section__button-section__sort-button ${
-                  sortByDate ? 'selected' : ''
+                className={`search-section__sort-button ${
+                  sortByDate ? 'search-section__sort-button--selected' : ''
                 }`}
                 onClick={setSortByDate}
               >

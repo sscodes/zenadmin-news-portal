@@ -7,7 +7,7 @@
   gap: 0.2rem;
 }
 
-.pagination {
+.pagination-container__pagination {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@
   transition: 0.1s ease-in-out all;
 }
 
-.pagination-icons {
+.pagination-container__pagination-icons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +32,7 @@
   font-size: 2rem;
 }
 
-.pagination-selected {
+.pagination-container__pagination--selected {
   background-color: var(--accent-color);
   color: var(--secondary-color);
 }
