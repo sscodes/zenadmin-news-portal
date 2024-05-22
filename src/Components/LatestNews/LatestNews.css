@@ -24,3 +24,29 @@
   font-size: 4.4rem;
   transition: 0.1s ease-in-out all;
 }
+
+.small-screen-navigation{
+  display: none;
+}
+
+@media (max-width: 1499px) {
+  .news-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .news-section__icon{
+    display: none;
+  }
+  .small-screen-navigation{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .news-section {
+    grid-template-columns: 1fr;
+  }
+}
+

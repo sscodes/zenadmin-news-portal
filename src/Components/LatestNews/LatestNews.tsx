@@ -19,25 +19,41 @@ const LatestNews = ({ news }: { news: HitsType[] }) => {
   };
 
   return (
-    <div className='news-section'>
-      <div className='news-section__icon'>
-        <IoIosArrowDropleftCircle
-          className={`${limit === 4 ? 'disabled' : 'icon'}`}
-          onClick={decrease}
-        />
-      </div>
-      {news?.slice(limit - 4, limit).map((eachNews, i: Key) => (
-        <div key={i}>
-          <NewsCard news={eachNews} />
+    <>
+      <div className='news-section'>
+        <div className='news-section__icon'>
+          <IoIosArrowDropleftCircle
+            className={`${limit === 4 ? 'disabled' : 'icon'}`}
+            onClick={decrease}
+          />
         </div>
-      ))}
-      <div className='news-section__icon'>
-        <IoIosArrowDroprightCircle
-          className={`${limit >= news?.length ? 'disabled' : 'icon'}`}
-          onClick={increase}
-        />
+        {news?.slice(limit - 4, limit).map((eachNews, i: Key) => (
+          <div key={i}>
+            <NewsCard news={eachNews} />
+          </div>
+        ))}
+        <div className='news-section__icon'>
+          <IoIosArrowDroprightCircle
+            className={`${limit >= news?.length ? 'disabled' : 'icon'}`}
+            onClick={increase}
+          />
+        </div>
       </div>
-    </div>
+      <div className='small-screen-navigation'>
+        <div>
+          <IoIosArrowDropleftCircle
+            className={`${limit === 4 ? 'disabled' : 'icon'}`}
+            onClick={decrease}
+          />
+        </div>
+        <div>
+          <IoIosArrowDroprightCircle
+            className={`${limit >= news?.length ? 'disabled' : 'icon'}`}
+            onClick={increase}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

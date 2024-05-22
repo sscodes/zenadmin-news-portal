@@ -4,29 +4,6 @@
   gap: 2rem;
 }
 
-input {
-  font-size: 2rem;
-  padding: 0.7%;
-  border: none;
-  border-radius: 15px;
-  font-family: var(--title-font-2);
-  width: 74rem;
-}
-
 .latest-news {
   font-family: var(--title-font-2);
-}
-
-.home-skeleton-section {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
-.home-skeleton-section__skeleton {
-  background-color: var(--skeleton-color);
-  display: inline-block;
-  height: 15rem;
-  width: 25rem;
-  border-radius: 10px;
 }

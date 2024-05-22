@@ -1,4 +1,21 @@
 .search-section {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  font-size: 2rem;
+  padding: 0.7%;
+  border: none;
+  border-radius: 15px;
+  font-family: var(--title-font-2);
+  width: 74vw;
+}
+
+@media (max-width: 400px) {
+  input {
+    font-size: 1.4rem;
+    padding: 1%;
+    border-radius: 10px;
   }
+}

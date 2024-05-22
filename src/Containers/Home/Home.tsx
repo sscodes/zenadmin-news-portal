@@ -6,7 +6,7 @@ import Error from '../../Components/Error/Error';
 import LatestNews from '../../Components/LatestNews/LatestNews';
 import SearchedNews from '../../Components/SearchedNews/SearchedNews';
 import SearchSection from '../../Components/SerachSection/SearchSection';
-import Skeleton from '../../Components/Skeleton';
+import Skeleton from '../../Components/Skeleton/Skeleton';
 import {
   notFoundErrorMessage,
   techErrorMessage,

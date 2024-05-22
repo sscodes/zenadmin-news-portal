@@ -19,6 +19,7 @@
 
 .pagination:hover {
   border-color:var(--border-color);
+  transition: 0.1s ease-in-out all;
 }
 
 .pagination-icons {
@@ -34,4 +35,10 @@
 .pagination-selected {
   background-color: var(--accent-color);
   color: var(--secondary-color);
+}
+
+@media (max-width: 550px) {
+  .pagination-container {
+    display: none;
+  }
 }

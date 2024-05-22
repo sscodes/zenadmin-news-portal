@@ -40,6 +40,13 @@
   font-weight: 400;
 }
 
+@media (max-width: 550px) {
+  .comment-card__comment {
+    font-size: 1rem;
+    word-wrap: break-word;
+  }
+}
+
 .comment-card__show-more {
   cursor: pointer;
 }

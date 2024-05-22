@@ -76,3 +76,16 @@
   border-radius: 10px;
   background-color: var(--skeleton-color);
 }
+
+@media (max-width: 550px) {
+  .news-detail__points {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .news-detail__title {
+    font-size: 1.2rem;
+  }
+}

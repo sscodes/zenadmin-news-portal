@@ -11,10 +11,10 @@ const NewsCard = ({ news }: { news: HitsType }) => {
   return (
     <div className='news-card' onClick={navigateToDetails}>
       <div className='news-card__title'>
-        <a href={news?.url} target='_blank' className='news-card__new-title'>
-          {news?.title.slice(0, 74)}
-          {news?.title.length >= 74 && '...'}
-        </a>
+        <div className='news-card__new-title'>
+          {news?.title.slice(0, 50)}
+          {news?.title.length >= 50 && '...'}
+        </div>
       </div>
       <div className='news-card__author'>
         by <b>@{news?.author}</b>

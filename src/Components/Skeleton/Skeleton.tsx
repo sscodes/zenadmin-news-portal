@@ -1,3 +1,5 @@
+import './Skeleton.css';
+
 const Skeleton = () => {
   return (
     <div>
