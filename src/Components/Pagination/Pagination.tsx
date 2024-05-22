@@ -20,7 +20,6 @@ const Pagination = ({
         className='pagination-container__pagination-icons'
         onClick={() =>
           setPage((i) => {
-            console.log(i);
             if (i === 0) return totalPages - 1;
             return i - 1;
           })

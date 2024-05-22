@@ -1,16 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchNewsDetail } from '../../API/API';
 import Comment from '../../Components/Comment/Comment';
 import Error from '../../Components/Error/Error';
 import { techErrorMessage } from '../../Constants/Constants';
 import './NewsDetail.css';
 import ErrorAnimation from '../../Components/Loader/ErrorAnimation';
+import { TbArrowBackUpDouble } from 'react-icons/tb';
 
 const NewsDetail: () => JSX.Element = () => {
   const [limit, setLimit] = useState(5);
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -45,8 +48,18 @@ const NewsDetail: () => JSX.Element = () => {
     <div></div>
   ) : (
     <div className='news-detail'>
+      <div>
+        <button className='news-detail__go-back' onClick={() => navigate('/')}>
+          <div className='news-detail__go-back-icon'>
+            <TbArrowBackUpDouble />
+          </div>
+          <div>Go Back</div>
+        </button>
+      </div>
       <a href={data.url} target='_blank' className='news-detail__title'>
-        <h1>{data.title}</h1>
+        <h1>
+          {data.title} by @{data.author}
+        </h1>
       </a>
       <div className='news-detail__points'>
         <div className='news-detail__icon'>

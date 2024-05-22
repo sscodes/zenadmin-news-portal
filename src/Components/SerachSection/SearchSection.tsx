@@ -6,10 +6,15 @@ import { delay } from '../../Constants/Constants';
 import { useDebounce } from '../../Hooks/useDebounce';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import './SearchSection.css';
+import useSessionStorage from '../../Hooks/useSessionStorage';
 
 const SearchSection = ({ page }: { page: number }) => {
   let [searchParams, setSearchParams] = useSearchParams();
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const { setData, getData, deleteData } = useSessionStorage();
+
+  const [searchKeyword, setSearchKeyword] = useState(
+    () => getData('searchKeyword') || ''
+  );
 
   const debouncedSearchKeyword = useDebounce(searchKeyword, delay);
 
@@ -43,6 +48,9 @@ const SearchSection = ({ page }: { page: number }) => {
       setSearchParams(searchParams, { replace: true });
     }
     setSearchParams({ query: searchKeyword });
+
+    if (searchKeyword.length > 0) setData('searchKeyword', searchKeyword);
+    else deleteData('searchKeyword');   
   }, [searchKeyword]);
 
   useEffect(() => {
@@ -60,6 +68,7 @@ const SearchSection = ({ page }: { page: number }) => {
           type='text'
           placeholder='Search News...'
           onChange={(e) => setSearchKeyword(e.target.value)}
+          value={searchKeyword}
         />
       </div>
       {searchKeyword.length > 0 &&
