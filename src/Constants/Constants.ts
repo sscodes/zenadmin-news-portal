@@ -18,3 +18,39 @@ export const loaderVariants = {
     },
   },
 };
+
+export const circleVariants = {
+  initial: { scale: 0 },
+  animate: {
+    scale: [0, 1],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+export const exclamationVariants = {
+  initial: { height: 0 },
+  animate: {
+    height: ['0%', '100%'],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+      delay: 0.5,
+    },
+  },
+};
+
+export const containerVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: [0, 1, 1, 0],
+    transition: {
+      duration: 2,
+      ease: 'easeInOut',
+      repeat: Infinity,
+      repeatDelay: 1,
+    },
+  },
+};

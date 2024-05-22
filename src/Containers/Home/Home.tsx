@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { fetchLatestNews } from '../../API/API';
-import Images from '../../Assets';
 import Error from '../../Components/Error/Error';
+import ErrorAnimation from '../../Components/Error/ErrorAnimation';
 import LatestNews from '../../Components/LatestNews/LatestNews';
+import Pagination from '../../Components/Pagination/Pagination';
 import SearchedNews from '../../Components/SearchedNews/SearchedNews';
 import SearchSection from '../../Components/SerachSection/SearchSection';
 import Skeleton from '../../Components/Skeleton/Skeleton';
@@ -13,7 +14,6 @@ import {
 } from '../../Constants/Constants';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import './Home.css';
-import Pagination from '../../Components/Pagination/Pagination';
 
 const Home = () => {
   const response = useSearchedNewsStore((state) => state.response);
@@ -34,7 +34,7 @@ const Home = () => {
           {isLoading ? (
             <Skeleton />
           ) : error ? (
-            <Error image={Images.Error} message={techErrorMessage} />
+            <Error loader={<ErrorAnimation />} message={techErrorMessage} />
           ) : (
             data && !response.data && <LatestNews news={data.hits} />
           )}
@@ -43,7 +43,7 @@ const Home = () => {
       {response.isLoading ? (
         <Skeleton />
       ) : response.error ? (
-        <Error image={Images.Error} message={techErrorMessage} />
+        <Error loader={<ErrorAnimation />} message={techErrorMessage} />
       ) : response.data && response.data.hits.length > 0 ? (
         <>
           <SearchedNews news={response.data?.hits} />
@@ -54,7 +54,7 @@ const Home = () => {
       ) : (
         response.data &&
         response.data.hits.length === 0 && (
-          <Error image={Images.NotFoundError} message={notFoundErrorMessage} />
+          <Error loader={<ErrorAnimation />} message={notFoundErrorMessage} />
         )
       )}
     </div>

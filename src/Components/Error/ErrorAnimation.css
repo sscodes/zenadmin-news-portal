@@ -1,0 +1,19 @@
+.red-circle {
+  width: 10rem;
+  height: 10rem;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  position: relative;
+}
+
+.exclamation-mark {
+  color: white;
+  font-size: 8rem;
+  font-weight: bold;
+  line-height: 1;
+  overflow: hidden;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
