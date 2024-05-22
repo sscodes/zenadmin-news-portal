@@ -1,6 +1,36 @@
 .search-section {
   display: flex;
+  flex-direction: column;
+}
+
+.search-section__input-section {
+  display: flex;
   justify-content: center;
+}
+
+.search-section__button-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.search-section__button-section__sort-button{
+  font-size: 1.7rem;
+  padding: 0.7rem;
+  border-radius: 15px;
+  font-family: var(--title-font-2);
+  background-color: var(--background-color);
+  cursor: pointer;
+  font-weight: 700;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.selected{
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
 }
 
 input {

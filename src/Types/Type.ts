@@ -1,4 +1,4 @@
-import { UseQueryResult } from "@tanstack/react-query";
+import { UseQueryResult } from '@tanstack/react-query';
 
 export type HitsType = {
   _highlightResult: {
@@ -78,7 +78,7 @@ export type NewsDetails = {
   id: number;
   text: string;
   url: string;
-}
+};
 
 export type SearchedNewsstore = {
   response: {
@@ -86,5 +86,10 @@ export type SearchedNewsstore = {
     isLoading: boolean;
     error: Error | null;
   };
+  sortByPoints: boolean;
+  sortByDate: boolean;
   setNews: (res: UseQueryResult<NewsListsType, Error>) => void;
+  setSortByPoints: () => void;
+  setSortByDate: () => void;
+  setSortInital: () => void;
 };

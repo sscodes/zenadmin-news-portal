@@ -7,7 +7,7 @@ import Comment from '../../Components/Comment/Comment';
 import Error from '../../Components/Error/Error';
 import { techErrorMessage } from '../../Constants/Constants';
 import './NewsDetail.css';
-import ErrorAnimation from '../../Components/Error/ErrorAnimation';
+import ErrorAnimation from '../../Components/Loader/ErrorAnimation';
 
 const NewsDetail: () => JSX.Element = () => {
   const [limit, setLimit] = useState(5);
@@ -40,7 +40,7 @@ const NewsDetail: () => JSX.Element = () => {
       <div className='detail-skeleton-section__comments-skeleton animate-pulse'></div>
     </div>
   ) : error ? (
-    <Error loader={<ErrorAnimation/>} message={techErrorMessage} />
+    <Error loader={<ErrorAnimation />} message={techErrorMessage} />
   ) : !data ? (
     <div></div>
   ) : (

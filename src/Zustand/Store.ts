@@ -8,6 +8,8 @@ export const useSearchedNewsStore = create<SearchedNewsstore>((set) => ({
     isLoading: false,
     error: null,
   },
+  sortByPoints: false,
+  sortByDate: true,
   setNews: (res: UseQueryResult<NewsListsType, Error>) => {
     set(() => ({
       response: {
@@ -15,6 +17,24 @@ export const useSearchedNewsStore = create<SearchedNewsstore>((set) => ({
         isLoading: res.isLoading,
         error: res.error,
       },
+    }));
+  },
+  setSortByPoints: () => {
+    set((state) => ({
+      sortByPoints: !state.sortByPoints,
+      sortByDate: false,
+    }));
+  },
+  setSortByDate: () => {
+    set((state) => ({
+      sortByPoints: false,
+      sortByDate: !state.sortByDate,
+    }));
+  },
+  setSortInital: () => {
+    set(() => ({
+      sortByPoints: true,
+      sortByDate: false,
     }));
   },
 }));

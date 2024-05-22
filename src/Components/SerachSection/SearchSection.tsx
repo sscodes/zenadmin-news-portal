@@ -9,7 +9,7 @@ import { delay } from '../../Constants/Constants';
 const SearchSection = ({ page }: { page: number }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
 
-  const debouncedSearchKeyword = useDebounce(searchKeyword, delay)
+  const debouncedSearchKeyword = useDebounce(searchKeyword, delay);
 
   const searchNewsResponse = useQuery({
     queryKey: ['search-news', debouncedSearchKeyword, page],
@@ -17,7 +17,14 @@ const SearchSection = ({ page }: { page: number }) => {
     enabled: debouncedSearchKeyword.length > 0,
   });
 
-  const setNews = useSearchedNewsStore((state) => state.setNews);
+  const {
+    setNews,
+    sortByPoints,
+    sortByDate,
+    setSortByPoints,
+    setSortByDate,
+    setSortInital,
+  } = useSearchedNewsStore((state) => state);
 
   useEffect(() => {
     setNews(searchNewsResponse);
@@ -27,13 +34,45 @@ const SearchSection = ({ page }: { page: number }) => {
     searchNewsResponse.error,
   ]);
 
+  useEffect(() => {
+    if (searchKeyword.length === 0) setSortInital();
+  }, [searchKeyword]);
+
   return (
     <div className='search-section'>
-      <input
-        type='text'
-        placeholder='Search News...'
-        onChange={(e) => setSearchKeyword(e.target.value)}
-      />
+      <div className='search-section__input-section'>
+        <input
+          type='text'
+          placeholder='Search News...'
+          onChange={(e) => setSearchKeyword(e.target.value)}
+        />
+      </div>
+      {searchKeyword.length &&
+        searchNewsResponse.data &&
+        searchNewsResponse.data.hits.length > 0 && (
+          <div className='search-section__button-section'>
+            <div>
+              <button
+                className={`search-section__button-section__sort-button ${
+                  sortByPoints ? 'selected' : ''
+                }`}
+                onClick={setSortByPoints}
+              >
+                Sort by Points
+              </button>
+            </div>
+            <div>
+              <button
+                className={`search-section__button-section__sort-button ${
+                  sortByDate ? 'selected' : ''
+                }`}
+                onClick={setSortByDate}
+              >
+                Sort by Date
+              </button>
+            </div>
+          </div>
+        )}
     </div>
   );
 };

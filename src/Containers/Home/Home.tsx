@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { fetchLatestNews } from '../../API/API';
 import Error from '../../Components/Error/Error';
-import ErrorAnimation from '../../Components/Error/ErrorAnimation';
 import LatestNews from '../../Components/LatestNews/LatestNews';
+import ErrorAnimation from '../../Components/Loader/ErrorAnimation';
 import Pagination from '../../Components/Pagination/Pagination';
 import SearchedNews from '../../Components/SearchedNews/SearchedNews';
 import SearchSection from '../../Components/SerachSection/SearchSection';
@@ -16,7 +16,9 @@ import { useSearchedNewsStore } from '../../Zustand/Store';
 import './Home.css';
 
 const Home = () => {
-  const response = useSearchedNewsStore((state) => state.response);
+  const { response, sortByPoints, sortByDate } = useSearchedNewsStore(
+    (state) => state
+  );
 
   const [page, setPage] = useState(response.data?.page || 0);
 
@@ -24,6 +26,16 @@ const Home = () => {
     queryKey: ['latestNews'],
     queryFn: fetchLatestNews,
   });
+
+  const handleNews = () => {
+    if (sortByPoints)
+      return response.data?.hits.sort((a, b) => b.points - a.points)!;
+    if (sortByDate)
+      return response.data?.hits.sort(
+        (a, b) => b.created_at_i - a.created_at_i
+      )!;
+    else return response.data?.hits!;
+  };
 
   return (
     <div className='home'>
@@ -46,7 +58,7 @@ const Home = () => {
         <Error loader={<ErrorAnimation />} message={techErrorMessage} />
       ) : response.data && response.data.hits.length > 0 ? (
         <>
-          <SearchedNews news={response.data?.hits} />
+          <SearchedNews news={handleNews()} />
           {response.data?.nbPages > 20 && (
             <Pagination page={page} setPage={setPage} />
           )}
