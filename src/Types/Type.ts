@@ -65,8 +65,6 @@ export type NewsListsType = {
 
 export type ImagesTypes = {
   Profile: string;
-  Error: string;
-  NotFoundError: string;
 };
 
 export type NewsDetails = {
