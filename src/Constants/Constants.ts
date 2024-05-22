@@ -3,6 +3,8 @@ export const techErrorMessage =
 
 export const notFoundErrorMessage = 'Sorry, no news found with that keyword.';
 
+export const delay = 1000;
+
 export const loaderVariants = {
   animationOne: {
     borderRadius: ['50%', '0%', '50%'],
