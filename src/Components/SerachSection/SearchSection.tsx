@@ -47,7 +47,7 @@ const SearchSection = ({ page }: { page: number }) => {
           onChange={(e) => setSearchKeyword(e.target.value)}
         />
       </div>
-      {searchKeyword.length &&
+      {searchKeyword.length > 0 &&
         searchNewsResponse.data &&
         searchNewsResponse.data.hits.length > 0 && (
           <div className='search-section__button-section'>
