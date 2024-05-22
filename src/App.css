@@ -2,6 +2,13 @@
   margin: 2%;
 }
 
+.loader-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 74vh;
+}
+
 @keyframes pulse {
   50% {
     opacity: 0.5;

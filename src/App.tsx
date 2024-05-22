@@ -1,18 +1,29 @@
+import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './Containers/Home/Home';
-import NewsDetail from './Containers/NewsDetail/NewsDetail';
 import Header from './Components/Header/Header';
+import Loader from './Components/Loader/Loader';
+
+const Home = lazy(() => import('./Containers/Home/Home'));
+const NewsDetail = lazy(() => import('./Containers/NewsDetail/NewsDetail'));
 
 function App() {
   return (
     <>
       <Header />
       <div className='hero-section'>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/news/:id' element={<NewsDetail />} />
-        </Routes>
+        <Suspense
+          fallback={
+            <div className='loader-section'>
+              <Loader />
+            </div>
+          }
+        >
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/news/:id' element={<NewsDetail />} />
+          </Routes>
+        </Suspense>
       </div>
     </>
   );

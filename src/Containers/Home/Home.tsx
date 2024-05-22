@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { fetchLatestNews } from '../../API/API';
 import Images from '../../Assets';
 import Error from '../../Components/Error/Error';
@@ -12,18 +13,21 @@ import {
 } from '../../Constants/Constants';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import './Home.css';
+import Pagination from '../../Components/Pagination/Pagination';
 
 const Home = () => {
+  const response = useSearchedNewsStore((state) => state.response);
+
+  const [page, setPage] = useState(response.data?.page || 0);
+
   const { data, isLoading, error } = useQuery({
     queryKey: ['latestNews'],
     queryFn: fetchLatestNews,
   });
 
-  const response = useSearchedNewsStore((state) => state.response);
-
   return (
     <div className='home'>
-      <SearchSection />
+      <SearchSection page={page} />
       {!response.isLoading && !response.data && !response.error && (
         <div className='latest-news'>
           <h1>Latest News:</h1>
@@ -41,7 +45,12 @@ const Home = () => {
       ) : response.error ? (
         <Error image={Images.Error} message={techErrorMessage} />
       ) : response.data && response.data.hits.length > 0 ? (
-        <SearchedNews news={response.data?.hits} />
+        <>
+          <SearchedNews news={response.data?.hits} />
+          {response.data?.nbPages > 20 && (
+            <Pagination page={page} setPage={setPage} />
+          )}
+        </>
       ) : (
         response.data &&
         response.data.hits.length === 0 && (
