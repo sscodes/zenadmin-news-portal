@@ -8,7 +8,7 @@ import { useSearchedNewsStore } from '../../Zustand/Store';
 import './SearchSection.css';
 
 const SearchSection = ({ page }: { page: number }) => {
-  let [, SetURLSearchParams] = useSearchParams();
+  let [searchParams, setSearchParams] = useSearchParams();
   const [searchKeyword, setSearchKeyword] = useState('');
 
   const debouncedSearchKeyword = useDebounce(searchKeyword, delay);
@@ -38,8 +38,16 @@ const SearchSection = ({ page }: { page: number }) => {
 
   useEffect(() => {
     if (searchKeyword.length === 0) setSortInital();
-    SetURLSearchParams({ query: searchKeyword });
+    setSearchParams({ query: searchKeyword });
   }, [searchKeyword]);
+
+  useEffect(() => {
+    if (sortByPoints) searchParams.set('sortByPoints', sortByPoints.toString());
+    else searchParams.delete('sortByPoints');
+    if (sortByDate) searchParams.set('sortByDate', sortByDate.toString());
+    else searchParams.delete('sortByDate');
+    setSearchParams(searchParams, { replace: true });
+  }, [sortByPoints, sortByDate]);
 
   return (
     <div className='search-section'>
