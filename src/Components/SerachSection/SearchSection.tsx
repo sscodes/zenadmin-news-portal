@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { fetchSearchResults } from '../../API/API';
+import { delay } from '../../Constants/Constants';
+import { useDebounce } from '../../Hooks/useDebounce';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import './SearchSection.css';
-import { useDebounce } from '../../Hooks/useDebounce';
-import { delay } from '../../Constants/Constants';
 
 const SearchSection = ({ page }: { page: number }) => {
+  let [, SetURLSearchParams] = useSearchParams();
   const [searchKeyword, setSearchKeyword] = useState('');
 
   const debouncedSearchKeyword = useDebounce(searchKeyword, delay);
@@ -36,6 +38,7 @@ const SearchSection = ({ page }: { page: number }) => {
 
   useEffect(() => {
     if (searchKeyword.length === 0) setSortInital();
+    SetURLSearchParams({ query: searchKeyword });
   }, [searchKeyword]);
 
   return (
