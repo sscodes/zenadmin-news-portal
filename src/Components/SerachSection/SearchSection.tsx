@@ -4,14 +4,14 @@ import { fetchSearchResults } from '../../API/API';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import './SearchSection.css';
 
-const SearchSection = () => {
+const SearchSection = ({ page }: { page: number }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
 
   // const debouncedSearchKeyword = useDebounce(searchKeyword)
 
   const searchNewsResponse = useQuery({
-    queryKey: ['search-news', searchKeyword],
-    queryFn: () => fetchSearchResults(searchKeyword),
+    queryKey: ['search-news', searchKeyword, page],
+    queryFn: () => fetchSearchResults(searchKeyword, page),
     enabled: searchKeyword.length > 0,
   });
 

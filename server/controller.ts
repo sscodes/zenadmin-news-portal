@@ -9,10 +9,7 @@ type responseType = {
   };
 };
 
-const getLatestNews = async (
-  _req: any,
-  res: responseType
-) => {
+const getLatestNews = async (_req: any, res: responseType) => {
   try {
     const response = await crossFetch(
       'http://hn.algolia.com/api/v1/search_by_date?tags=story'
@@ -43,16 +40,17 @@ const getSearchedNews: (
   req: {
     query: {
       query: string;
+      page: number;
     };
   },
   res: responseType
 ) => Promise<void> = async (
-  req: { query: { query: string } },
+  req: { query: { query: string; page: number } },
   res: responseType
 ) => {
   try {
     const response = await crossFetch(
-      ` http://hn.algolia.com/api/v1/search?query=${req.query.query}&tags=story`
+      `http://hn.algolia.com/api/v1/search?query=${req.query.query}&tags=story&page=${req.query.page}`
     );
     const data = await response.json();
     res.json(data);

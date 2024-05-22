@@ -1,9 +1,9 @@
 import { NewsListsType, NewsDetails } from '../Types/Type';
 
-export const fetchSearchResults = async (
-  key: string
-) => {
-  const res = await fetch(`http://localhost:4000/api/search?query=${key}`);
+export const fetchSearchResults = async (key: string, page: number) => {
+  const res = await fetch(
+    `http://localhost:4000/api/search?query=${key}&page=${page}`
+  );
   return (await res.json()) as NewsListsType;
 };
 
