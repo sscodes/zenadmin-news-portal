@@ -4,6 +4,7 @@ import './App.css';
 import Header from './Components/Header/Header';
 import Loader from './Components/Loader/Loader';
 
+// implemented lazy loading
 const Home = lazy(() => import('./Containers/Home/Home'));
 const NewsDetail = lazy(() => import('./Containers/NewsDetail/NewsDetail'));
 
@@ -12,6 +13,7 @@ function App() {
     <>
       <Header />
       <div className='hero-section'>
+        {/* implemented code splitting */}
         <Suspense
           fallback={
             <div className='loader-section'>

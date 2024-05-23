@@ -18,10 +18,12 @@ const NewsDetail: () => JSX.Element = () => {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
+    // added id in ueryKey to distinguish each news detail get request
     queryKey: ['news-details', id],
     queryFn: () => fetchNewsDetail(Number(id)),
   });
 
+  // logic for infinite scrolling
   const handleScrolledToBottom = () => {
     if (
       document.documentElement.scrollTop + window.innerHeight >=
@@ -30,6 +32,7 @@ const NewsDetail: () => JSX.Element = () => {
       setLimit((e) => e + 10);
   };
 
+  // listenning for scroll events
   useEffect(() => {
     window.addEventListener('scroll', handleScrolledToBottom);
 
@@ -37,18 +40,21 @@ const NewsDetail: () => JSX.Element = () => {
   }, []);
 
   return isLoading ? (
+    // component when data fetch is loading
     <div className='detail-skeleton-section'>
       <div className='detail-skeleton-section__title-skeleton animate-pulse'></div>
       <div className='detail-skeleton-section__points-skeleton animate-pulse'></div>
       <div className='detail-skeleton-section__comments-skeleton animate-pulse'></div>
     </div>
-  ) : error ? (
+  ) : // component when data fetch sends error
+  error ? (
     <Error loader={<ErrorAnimation />} message={techErrorMessage} />
   ) : !data ? (
     <div></div>
   ) : (
     <div className='news-detail'>
       <div>
+        {/* go back button for user to get back to the search results */}
         <button className='news-detail__go-back' onClick={() => navigate('/')}>
           <div className='news-detail__go-back-icon'>
             <TbArrowBackUpDouble />
@@ -73,6 +79,7 @@ const NewsDetail: () => JSX.Element = () => {
           {data.children.length > 0 ? (
             <Comment data={data.children} limit={limit} />
           ) : (
+            // condition when there are no comments
             <div className='news-detail__no-comments'>No Comments Yet</div>
           )}
         </div>
