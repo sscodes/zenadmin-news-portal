@@ -5,6 +5,6 @@
     or 
     ``` yarn add ```
 3. Run the following command to run the application:
-    ``` npm run dev ```
+    ``` npm start ```
     or 
-    ``` yarn dev ```
+    ``` yarn start ```
