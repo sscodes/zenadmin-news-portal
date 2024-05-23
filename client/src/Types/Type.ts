@@ -91,3 +91,9 @@ export type SearchedNewsstore = {
   setSortByDate: () => void;
   setSortInital: () => void;
 };
+
+export type PaginationStoreType = {
+  page: number;
+  setPage: (i: number) => void
+  setPageInital: () => void;
+};

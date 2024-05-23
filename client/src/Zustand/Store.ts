@@ -1,6 +1,6 @@
 import { UseQueryResult } from '@tanstack/react-query';
 import { create } from 'zustand';
-import { NewsListsType, SearchedNewsstore } from '../Types/Type';
+import { NewsListsType, PaginationStoreType, SearchedNewsstore } from '../Types/Type';
 
 export const useSearchedNewsStore = create<SearchedNewsstore>((set) => ({
   response: {
@@ -35,6 +35,20 @@ export const useSearchedNewsStore = create<SearchedNewsstore>((set) => ({
     set(() => ({
       sortByPoints: true,
       sortByDate: false,
+    }));
+  },
+}));
+
+export const usePaginationStore = create<PaginationStoreType>((set) => ({
+  page: 0,
+  setPage: (i: number) => {
+    set(() => ({
+      page: i,
+    }));
+  },
+  setPageInital: () => {
+    set(() => ({
+      page: 0,
     }));
   },
 }));

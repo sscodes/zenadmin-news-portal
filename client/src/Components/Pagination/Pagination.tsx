@@ -1,29 +1,25 @@
-import { useSearchedNewsStore } from '../../Zustand/Store';
+import { usePaginationStore, useSearchedNewsStore } from '../../Zustand/Store';
 import './Pagination.css';
 import {
   MdOutlineKeyboardDoubleArrowRight,
   MdOutlineKeyboardDoubleArrowLeft,
 } from 'react-icons/md';
 
-const Pagination = ({
-  page,
-  setPage,
-}: {
-  page: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-}) => {
+const Pagination = () => {
+  const { page, setPage } = usePaginationStore((state) => state);
   const response = useSearchedNewsStore((state) => state.response);
   const totalPages = response.data?.nbPages || 0;
+
+  const getPrevPage = () => {
+    if (page === 0) return totalPages - 1;
+    return page - 1;
+  };
+  const getNextPage = () => (page + 1) % totalPages;
   return (
     <div className='pagination-container'>
       <div
         className='pagination-container__pagination-icons'
-        onClick={() =>
-          setPage((i) => {
-            if (i === 0) return totalPages - 1;
-            return i - 1;
-          })
-        }
+        onClick={() => setPage(getPrevPage())}
       >
         <MdOutlineKeyboardDoubleArrowLeft />
       </div>
@@ -40,7 +36,7 @@ const Pagination = ({
       ))}
       <div
         className='pagination-container__pagination-icons'
-        onClick={() => setPage((i) => (i + 1) % totalPages)}
+        onClick={() => setPage(getNextPage())}
       >
         <MdOutlineKeyboardDoubleArrowRight />
       </div>

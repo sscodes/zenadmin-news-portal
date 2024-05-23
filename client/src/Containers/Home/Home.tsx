@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { fetchLatestNews } from '../../API/API';
 import Error from '../../Components/Error/Error';
 import LatestNews from '../../Components/LatestNews/LatestNews';
@@ -20,13 +19,13 @@ const Home = () => {
     (state) => state
   );
 
-  const [page, setPage] = useState(response.data?.page || 0);
-
+  // Querying the latest news
   const { data, isLoading, error } = useQuery({
     queryKey: ['latestNews'],
     queryFn: fetchLatestNews,
   });
 
+  // Sorting logic based on points or date
   const handleNews = () => {
     if (sortByPoints)
       return response.data?.hits.sort((a, b) => b.points - a.points)!;
@@ -39,29 +38,33 @@ const Home = () => {
 
   return (
     <div className='home'>
-      <SearchSection page={page} />
+      <SearchSection />
+
       {!response.isLoading && !response.data && !response.error && (
         <div className='home__latest-news'>
           <h1>Latest News:</h1>
+          {/* component when data fetch is loading */}
           {isLoading ? (
             <Skeleton />
-          ) : error ? (
+          ) : // component when data fetch sends error
+          error ? (
             <Error loader={<ErrorAnimation />} message={techErrorMessage} />
           ) : (
             data && !response.data && <LatestNews news={data.hits} />
           )}
         </div>
       )}
+
+      {/* component when data fetch is loading */}
       {response.isLoading ? (
         <Skeleton />
-      ) : response.error ? (
+      ) : // component when data fetch sends error
+      response.error ? (
         <Error loader={<ErrorAnimation />} message={techErrorMessage} />
       ) : response.data && response.data.hits.length > 0 ? (
         <>
           <SearchedNews news={handleNews()} />
-          {response.data?.nbPages > 20 && (
-            <Pagination page={page} setPage={setPage} />
-          )}
+          {response.data?.nbPages > 20 && <Pagination />}
         </>
       ) : (
         response.data &&

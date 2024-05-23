@@ -4,18 +4,24 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchSearchResults } from '../../API/API';
 import { delay } from '../../Constants/Constants';
 import { useDebounce } from '../../Hooks/useDebounce';
-import { useSearchedNewsStore } from '../../Zustand/Store';
+import { usePaginationStore, useSearchedNewsStore } from '../../Zustand/Store';
 import './SearchSection.css';
 import useSessionStorage from '../../Hooks/useSessionStorage';
 
-const SearchSection = ({ page }: { page: number }) => {
+const SearchSection = () => {
+  const { page, setPageInital } = usePaginationStore((state) => state);
+  // for getting and setting the query and conditions in URL
   let [searchParams, setSearchParams] = useSearchParams();
+
+  // custom hook for storing the search results in session storage
   const { setData, getData, deleteData } = useSessionStorage();
 
+  // checking for searchKeyword in session storage else initializing to empty string
   const [searchKeyword, setSearchKeyword] = useState(
     () => getData('searchKeyword') || ''
   );
 
+  // using custom hook for debouncing search keyword.
   const debouncedSearchKeyword = useDebounce(searchKeyword, delay);
 
   const searchNewsResponse = useQuery({
@@ -24,6 +30,7 @@ const SearchSection = ({ page }: { page: number }) => {
     enabled: debouncedSearchKeyword.length > 0,
   });
 
+  // setting search results on global state
   const {
     setNews,
     sortByPoints,
@@ -42,22 +49,29 @@ const SearchSection = ({ page }: { page: number }) => {
   ]);
 
   useEffect(() => {
+    // setting to default when search input section is emptied
     if (searchKeyword.length === 0) {
       setSortInital();
+      setPageInital();
       searchParams.delete('sortByPoints');
       setSearchParams(searchParams, { replace: true });
     }
+    // setting query on URL
     setSearchParams({ query: searchKeyword });
 
+    // logic for setting & deleting search results on session storage
     if (searchKeyword.length > 0) setData('searchKeyword', searchKeyword);
     else deleteData('searchKeyword');
   }, [searchKeyword]);
 
   useEffect(() => {
+    // logic for setting search by points on URL
     if (sortByPoints && searchKeyword.length > 0)
       searchParams.set('sortByPoints', sortByPoints.toString());
     else searchParams.delete('sortByPoints');
-    if (sortByDate && searchKeyword.length > 0) searchParams.set('sortByDate', sortByDate.toString());
+    // logic for setting search by date on URL
+    if (sortByDate && searchKeyword.length > 0)
+      searchParams.set('sortByDate', sortByDate.toString());
     else searchParams.delete('sortByDate');
     setSearchParams(searchParams, { replace: true });
   }, [sortByPoints, sortByDate]);
