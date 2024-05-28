@@ -1,6 +1,6 @@
 import LatestNewsSection from '../../Components/LatestNewsSection/LatestNewsSection';
 import SearchedNewsSection from '../../Components/SearchedNewsSection/SearchedNewsSection';
-import SearchSection from '../../Components/SerachSection/SearchSection';
+import SearchSection from '../../Components/SearchSection/SearchSection';
 import './Home.css';
 
 const Home = () => {

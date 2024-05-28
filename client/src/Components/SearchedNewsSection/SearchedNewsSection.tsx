@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   NOTFOUNDERRORMESSAGE,
   TECHERRORMESSAGE,
 } from '../../Constants/Constants';
+import useSessionStorage from '../../Hooks/useSessionStorage';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import Error from '../Error/Error';
 import ErrorAnimation from '../Loader/ErrorAnimation';
@@ -11,8 +13,16 @@ import SearchedNews from '../SearchedNews/SearchedNews';
 import Skeleton from '../Skeleton/Skeleton';
 
 const SearchedNewsSection = () => {
-  let [searchParams] = useSearchParams();
+  let [searchParams, setSearchParams] = useSearchParams();
   const response = useSearchedNewsStore((state) => state.response);
+  const { getData } = useSessionStorage();
+
+  useEffect(() => {
+    const keyWord = getData('searchKeyword');
+    if (keyWord) {
+      setSearchParams({ query: keyWord });
+    }
+  }, []);
 
   // Sorting logic based on points or date
   const handleNews = () => {

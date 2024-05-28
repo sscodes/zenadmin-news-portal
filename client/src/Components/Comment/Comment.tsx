@@ -24,8 +24,6 @@ const Comment = ({ data, limit }: PropType) => {
     return { __html: html };
   };
 
-  console.log('hello')
-
   return (
     <>
       {/* Limiting the number of comments shown by showing more comments with infinite scroll */}

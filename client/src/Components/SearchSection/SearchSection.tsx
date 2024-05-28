@@ -54,7 +54,7 @@ const SearchSection = () => {
 
     // logic for setting & deleting search results on session storage
     if (str.length > 0) setData('searchKeyword', str);
-    else deleteData('str');
+    else deleteData('searchKeyword');
   };
 
   const setParams = (val: string) => {
