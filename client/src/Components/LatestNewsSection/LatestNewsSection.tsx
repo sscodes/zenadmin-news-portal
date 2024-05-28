@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchLatestNews } from '../../API/API';
-import { techErrorMessage } from '../../Constants/Constants';
+import { TECHERRORMESSAGE } from '../../Constants/Constants';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import Error from '../Error/Error';
 import LatestNews from '../LatestNews/LatestNews';
@@ -25,7 +25,7 @@ const LatestNewsSection = () => {
             <Skeleton />
           ) : // component when data fetch sends error
           error ? (
-            <Error loader={<ErrorAnimation />} message={techErrorMessage} />
+            <Error loader={<ErrorAnimation />} message={TECHERRORMESSAGE} />
           ) : (
             data && !response.data && <LatestNews news={data.hits} />
           )}

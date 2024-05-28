@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import {
-  circleVariants,
-  containerVariants,
-  exclamationVariants,
+  CIRCLEVARIANTS,
+  CONTAINERVARIANTS,
+  EXCLAMATIONVARIANTS,
 } from '../../Constants/Constants';
 import './ErrorAnimation.css';
 
@@ -11,19 +11,19 @@ const ErrorAnimation: React.FC = () => {
   return (
     <motion.div
       className='error-container'
-      variants={containerVariants}
+      variants={CONTAINERVARIANTS}
       initial='initial'
       animate='animate'
     >
       <motion.div
         className='error-container__red-circle'
-        variants={circleVariants}
+        variants={CIRCLEVARIANTS}
         initial='initial'
         animate='animate'
       >
         <motion.div
           className='error-container__exclamation-mark'
-          variants={exclamationVariants}
+          variants={EXCLAMATIONVARIANTS}
           initial='initial'
           animate='animate'
         >

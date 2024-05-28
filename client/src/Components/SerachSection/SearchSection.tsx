@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchSearchResults } from '../../API/API';
-import { delay } from '../../Constants/Constants';
+import { DELAY } from '../../Constants/Constants';
 import { useDebounce } from '../../Hooks/useDebounce';
 import useSessionStorage from '../../Hooks/useSessionStorage';
 import { usePaginationStore, useSearchedNewsStore } from '../../Zustand/Store';
@@ -22,7 +22,7 @@ const SearchSection = () => {
   );
 
   // using custom hook for debouncing search keyword.
-  const debouncedSearchKeyword = useDebounce(searchKeyword, delay);
+  const debouncedSearchKeyword = useDebounce(searchKeyword, DELAY);
 
   const searchNewsResponse = useQuery({
     queryKey: ['search-news', debouncedSearchKeyword, page],

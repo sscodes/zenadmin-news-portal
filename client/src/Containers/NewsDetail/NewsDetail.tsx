@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchNewsDetail } from '../../API/API';
 import Comment from '../../Components/Comment/Comment';
 import Error from '../../Components/Error/Error';
-import { techErrorMessage } from '../../Constants/Constants';
+import { TECHERRORMESSAGE } from '../../Constants/Constants';
 import './NewsDetail.css';
 import ErrorAnimation from '../../Components/Loader/ErrorAnimation';
 import { TbArrowBackUpDouble } from 'react-icons/tb';
@@ -48,7 +48,7 @@ const NewsDetail: () => JSX.Element = () => {
     </div>
   ) : // component when data fetch sends error
   error ? (
-    <Error loader={<ErrorAnimation />} message={techErrorMessage} />
+    <Error loader={<ErrorAnimation />} message={TECHERRORMESSAGE} />
   ) : !data ? (
     <div></div>
   ) : (

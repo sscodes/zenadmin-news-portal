@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import {
-  notFoundErrorMessage,
-  techErrorMessage,
+  NOTFOUNDERRORMESSAGE,
+  TECHERRORMESSAGE,
 } from '../../Constants/Constants';
 import { useSearchedNewsStore } from '../../Zustand/Store';
 import Error from '../Error/Error';
@@ -30,7 +30,7 @@ const SearchedNewsSection = () => {
       {response.isLoading ? (
         <Skeleton />
       ) : response.error ? (
-        <Error loader={<ErrorAnimation />} message={techErrorMessage} />
+        <Error loader={<ErrorAnimation />} message={TECHERRORMESSAGE} />
       ) : response.data && response.data.hits.length > 0 ? (
         <>
           <SearchedNews news={handleNews()} />
@@ -39,7 +39,7 @@ const SearchedNewsSection = () => {
       ) : (
         response.data &&
         response.data.hits.length === 0 && (
-          <Error loader={<ErrorAnimation />} message={notFoundErrorMessage} />
+          <Error loader={<ErrorAnimation />} message={NOTFOUNDERRORMESSAGE} />
         )
       )}
     </>
