@@ -84,16 +84,11 @@ export type SearchedNewsstore = {
     isLoading: boolean;
     error: Error | null;
   };
-  sortByPoints: boolean;
-  sortByDate: boolean;
   setNews: (res: UseQueryResult<NewsListsType, Error>) => void;
-  setSortByPoints: () => void;
-  setSortByDate: () => void;
-  setSortInital: () => void;
 };
 
 export type PaginationStoreType = {
   page: number;
-  setPage: (i: number) => void
+  setPage: (i: number) => void;
   setPageInital: () => void;
 };

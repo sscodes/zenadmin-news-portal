@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchSearchResults } from '../../API/API';
 import { delay } from '../../Constants/Constants';
 import { useDebounce } from '../../Hooks/useDebounce';
+import useSessionStorage from '../../Hooks/useSessionStorage';
 import { usePaginationStore, useSearchedNewsStore } from '../../Zustand/Store';
 import './SearchSection.css';
-import useSessionStorage from '../../Hooks/useSessionStorage';
 
 const SearchSection = () => {
   const { page, setPageInital } = usePaginationStore((state) => state);
@@ -31,14 +31,7 @@ const SearchSection = () => {
   });
 
   // setting search results on global state
-  const {
-    setNews,
-    sortByPoints,
-    sortByDate,
-    setSortByPoints,
-    setSortByDate,
-    setSortInital,
-  } = useSearchedNewsStore((state) => state);
+  const setNews = useSearchedNewsStore((state) => state.setNews);
 
   useEffect(() => {
     setNews(searchNewsResponse);
@@ -48,33 +41,30 @@ const SearchSection = () => {
     searchNewsResponse.error,
   ]);
 
-  useEffect(() => {
-    // setting to default when search input section is emptied
-    if (searchKeyword.length === 0) {
-      setSortInital();
+  const checkSearchKeyword: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const str = event.target.value;
+    setSearchKeyword(str);
+    if (str.length === 0) {
       setPageInital();
       searchParams.delete('sortByPoints');
       setSearchParams(searchParams, { replace: true });
     }
     // setting query on URL
-    setSearchParams({ query: searchKeyword });
+    setSearchParams({ query: str });
 
     // logic for setting & deleting search results on session storage
-    if (searchKeyword.length > 0) setData('searchKeyword', searchKeyword);
-    else deleteData('searchKeyword');
-  }, [searchKeyword]);
+    if (str.length > 0) setData('searchKeyword', str);
+    else deleteData('str');
+  };
 
-  useEffect(() => {
-    // logic for setting search by points on URL
-    if (sortByPoints && searchKeyword.length > 0)
-      searchParams.set('sortByPoints', sortByPoints.toString());
-    else searchParams.delete('sortByPoints');
-    // logic for setting search by date on URL
-    if (sortByDate && searchKeyword.length > 0)
-      searchParams.set('sortByDate', sortByDate.toString());
-    else searchParams.delete('sortByDate');
+  const setParams = (val: string) => {
+    if (searchKeyword.length > 0) {
+      searchParams.set('sortBy', val);
+    } else searchParams.delete('sortBy');
     setSearchParams(searchParams, { replace: true });
-  }, [sortByPoints, sortByDate]);
+  };
+
+  const paramsValue = searchParams.get('sortBy');
 
   return (
     <div className='search-section'>
@@ -82,7 +72,7 @@ const SearchSection = () => {
         <input
           type='text'
           placeholder='Search News...'
-          onChange={(e) => setSearchKeyword(e.target.value)}
+          onChange={checkSearchKeyword}
           value={searchKeyword}
         />
       </div>
@@ -93,9 +83,11 @@ const SearchSection = () => {
             <div>
               <button
                 className={`search-section__sort-button ${
-                  sortByPoints ? 'search-section__sort-button--selected' : ''
+                  paramsValue === 'points'
+                    ? 'search-section__sort-button--selected'
+                    : ''
                 }`}
-                onClick={setSortByPoints}
+                onClick={() => setParams('points')}
               >
                 Sort by Points
               </button>
@@ -103,9 +95,11 @@ const SearchSection = () => {
             <div>
               <button
                 className={`search-section__sort-button ${
-                  sortByDate ? 'search-section__sort-button--selected' : ''
+                  paramsValue === 'date'
+                    ? 'search-section__sort-button--selected'
+                    : ''
                 }`}
-                onClick={setSortByDate}
+                onClick={() => setParams('date')}
               >
                 Sort by Date
               </button>
