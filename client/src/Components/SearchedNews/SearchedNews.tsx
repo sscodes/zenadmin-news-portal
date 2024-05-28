@@ -8,7 +8,7 @@ const SearchedNews = ({ news }: { news: HitsType[] }) => {
     <div className='searched-news'>
       {news?.map((eachNews: any, i: Key) => (
         <div key={i}>
-          <NewsCard news={eachNews} />
+          <NewsCard news={eachNews} matchedValue={eachNews._highlightResult} />
         </div>
       ))}
     </div>

@@ -1,23 +1,25 @@
 import { UseQueryResult } from '@tanstack/react-query';
 
-export type HitsType = {
-  _highlightResult: {
-    author: {
-      matchLevel: string;
-      matchedWords: string[];
-      value: string;
-    };
-    title: {
-      matchLevel: string;
-      matchedWords: string[];
-      value: string;
-    };
-    url: {
-      matchLevel: string;
-      matchedWords: string[];
-      value: string;
-    };
+export type HighlightsType = {
+  author: {
+    matchLevel: string;
+    matchedWords: string[];
+    value: string;
   };
+  title: {
+    matchLevel: string;
+    matchedWords: string[];
+    value: string;
+  };
+  url: {
+    matchLevel: string;
+    matchedWords: string[];
+    value: string;
+  };
+};
+
+export type HitsType = {
+  _highlightResult: HighlightsType;
   _tags: string[];
   author: string;
   created_at: string;
