@@ -54,3 +54,6 @@ export const CONTAINERVARIANTS = {
     },
   },
 };
+
+export const DIRECTION_LEFT = 'LEFT';
+export const DIRECTION_RIGHT = 'RIGHT';

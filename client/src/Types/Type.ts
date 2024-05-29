@@ -91,6 +91,11 @@ export type SearchedNewsstore = {
 
 export type PaginationStoreType = {
   page: number;
+  startPage: number;
+  endPage: number;
   setPage: (i: number) => void;
   setPageInital: () => void;
+  setStartEnd: (direction: string) => void;
+  setInitalStartEnd: () => void;
+  setFinalStartEnd: (totalPages: number) => void;
 };

@@ -17,8 +17,15 @@
   border: 2px solid var(--background-color);
 }
 
-.pagination:hover {
-  border-color:var(--border-color);
+.pagination-container__pagination__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.pagination-container__pagination:hover {
+  border-color: var(--border-color);
   transition: 0.1s ease-in-out all;
 }
 
@@ -35,6 +42,7 @@
 .pagination-container__pagination--selected {
   background-color: var(--accent-color);
   color: var(--secondary-color);
+  border: 2px solid var(--border-color);
 }
 
 @media (max-width: 550px) {
