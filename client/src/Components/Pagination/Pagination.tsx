@@ -28,7 +28,7 @@ const Pagination = () => {
   const getNextPage = () => (page + 1) % totalPages;
 
   const handlePreviousPage = () => {
-    if (page <= 41) setStartEnd(DIRECTION_LEFT);
+    if (page <= totalPages-9) setStartEnd(DIRECTION_LEFT);
     setPage(getPrevPage());
   };
 
@@ -93,7 +93,7 @@ const Pagination = () => {
               </div>
             )
           )}
-          {endPage < 48 &&
+          {endPage < totalPages-2 &&
             [...Array(3)].map((_, i) => (
               <div className={`pagination-container__pagination__dots`} key={i}>
                 .
